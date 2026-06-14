@@ -38,6 +38,7 @@
 ### 4.1 Skills
 
 - [Skills](agents/skills/skills.md)
+- [ppt创作](agents/skills/pptx-maker/pptx-maker-skills.md)
 
 ### 4.2 MCP
 

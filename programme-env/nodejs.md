@@ -14,17 +14,25 @@ nodejs 下载地址：
 
 安装时选择默认选项即可。
 
-## 配置环境变量
+## 检查并配置环境变量
 
 打开命令行，输入以下命令：
 
 ```bash
-# 添加到用户变量
-setx PATH "%PATH%;C:\Program Files\nodejs"
 # 检查 Node.js 版本
 node -v
 npm -v
 npx -v
+```
+
+如果显示版本号，说明安装成功。
+如果显示 `command not found`，说明环境变量没有配置正确。
+
+配置环境变量：
+
+```bash
+# 添加到用户变量
+setx PATH "%PATH%;C:\Program Files\nodejs"
 ```
 
 ## 配置镜像

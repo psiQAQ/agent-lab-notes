@@ -22,7 +22,7 @@ Skills 是一套给 Agent 注入可复用能力和流程的机制，用于沉淀
 ```bash
 npx skills add https://github.com/anthropics/Skills.git -g --skill docx --skill pdf --skill pptx --skill xlsx --skill theme-factory --skill doc-coauthoring --skill mcp-builder --skill skill-creator -y
 npx skills add https://github.com/vercel-labs/skills.git -g --skill find-skills -y
-npx skills add op7418/Humanizer-zh -g -y
+npx skills add https://github.com/op7418/Humanizer-zh -g -y
 npx skills add https://github.com/github/awesome-copilot.git -g --skill refactor -y
 npx skills add https://github.com/useai-pro/openclaw-skills-security.git -g --skill skill-vetter -y
 ```
@@ -63,3 +63,18 @@ npx skills init [name]
 
 更多命令请参考 <https://github.com/vercel-labs/skills>
 也可让 Agent 帮你管理
+
+## 利用镜像站安装 skills
+
+### Github 镜像站
+
+<https://gh-proxy.com/>
+
+```bash
+# 例如安装 Humanizer-zh
+git clone https://gh-proxy.org/https://github.com/op7418/Humanizer-zh.git
+npx skills add ./Humanizer-zh -g -a claude-code -y
+
+git clone https://gh-proxy.org/https://github.com/anthropics/Skills.git
+npx skills add ./Skills -g --skill docx --skill pdf --skill pptx --skill xlsx --skill theme-factory --skill doc-coauthoring --skill mcp-builder --skill skill-creator -y
+```

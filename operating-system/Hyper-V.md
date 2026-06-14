@@ -53,9 +53,12 @@ dism.exe /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V
 
 <https://www.microsoft.com/en-us/software-download/windows11>
 
+下载推荐教程：
+
+[Windows 重装必备：如何正确下载官方原版系统镜像？](https://www.bilibili.com/video/BV1ckVG6gENq)
+
 如果官方下载速度不理想，可以自行评估下面这些第三方镜像分发站点，但我更建议优先确认来源可靠性：
 
-- <https://xspt.ustc.edu.cn>
 - <https://sysin.org/blog/windows-11>
 - <https://msdn.sjjzm.com/win11.html>
 - <https://uupdump.net/>
@@ -180,7 +183,7 @@ oobe\bypassnro
 
 如果你选择联网安装，系统通常会继续推动你使用微软账户。
 
-可以尝试下面这条命令：
+按 Shift + F10 打开命令提示符，输入：
 
 ```cmd
 start ms-cxh:localonly
