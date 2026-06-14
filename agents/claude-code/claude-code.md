@@ -159,6 +159,16 @@ claude
 
 ![Claude-Code-hello](assets/screenshot/Claude-Code-hello.png)
 
+## 全局指令
+
+CLAUDE.md 是 Claude Code 读取的项目/用户级指令文件，作用是告诉编码智能体“项目怎么构建、测试、改代码、遵守哪些规范”；通常放在项目根目录，必要时也可放在子目录做局部规则，用户全局规则则分别放在对应工具支持的用户配置目录中。
+
+本人使用指令文件参考：
+
+[CLAUDE.md](./CLAUDE.md)
+
+可以下载后放到 `%USERPROFILE%/.claude` 下或者项目根目录的 `.claude` 文件夹下。
+
 ## 常见问题
 
 ### 1. `claude` 命令找不到
