@@ -58,7 +58,17 @@
 
 - 📄[zotero 指南](others/zotero.md)
 
-## 6. 补充资料
+## 6. 大模型排行榜
+
+- 📊[Artificial Analysis｜AI模型评测与API性能分析](https://artificialanalysis.ai/)
+- ⚔️[Arena AI｜大模型竞技场与排行榜](https://arena.ai/)
+
+## 7. AI 新闻
+
+- 📰[24 小时 AI 更新雷达](https://learnprompt.github.io/ai-news-radar/)
+- 📰[AIHOT](https://aihot.virxact.com/)
+
+## 8. 补充资料
 
 ### bilibili-技术爬爬虾
 
@@ -77,3 +87,4 @@
 - 📺[万字拆解AI Agent编年史](https://www.bilibili.com/video/BV1NL9tBsELS)
 - 📺[对姚顺宇的4小时访谈](https://www.bilibili.com/video/BV1YR5E6EE9o)
 - 📺[中美大模型差距过去一年变大还是缩小？- Hugging Face | 王铁震](https://www.bilibili.com/video/BV1HDVT6bE8x)
+- 📺[跟三个大厂码农聊了一晚上，程序员眼中AI叙事的真相原来是这样](https://www.bilibili.com/video/BV1gyEd6xEyu)
