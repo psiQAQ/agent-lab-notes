@@ -22,6 +22,7 @@
 
 - 📄[Claude Code 指南](agents/claude-code/claude-code.md)
   - 📺[国内 Claude Code 安装保姆级教程](https://www.bilibili.com/video/BV1AjGD6mEV4)
+- 🚀[Claude Code 一键快捷启动方式，下载放桌面](agents/claude-code/cc.bat)
 - 📄[CLAUDE.md - 全局指令示范文件](agents/claude-code/CLAUDE.md)
 - 📄[Claude Code 常用命令](agents/claude-code/tutorial/常用命令.md)
   - 📺[常用命令视频](https://www.bilibili.com/video/?p=1)
