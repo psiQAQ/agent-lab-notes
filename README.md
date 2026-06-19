@@ -41,7 +41,7 @@
 ### 4.1 Skills
 
 - 📄[Skills](agents/skills/skills.md)
-- 📄[ppt创作](agents/skills/pptx-maker/pptx-maker-skills.md)
+- 📄[ppt](agents/skills/pptx-related-skills.md)
 
 ### 4.2 MCP
 
@@ -83,6 +83,7 @@
 
 ### 其他
 
+- 📺[【Markdown 完全指南】5 分钟上手，让你的笔记永远不被软件绑架！](https://www.bilibili.com/video/BV1tJXZBgEoC)
 - 📺[Zotero8/9通用零基础教程](https://www.bilibili.com/video/BV1ecQBBZESv)
 - 📺[codex提升科研效率100倍](https://www.bilibili.com/video/BV1NwEb6gEy1)
 - 📺[万字拆解AI Agent编年史](https://www.bilibili.com/video/BV1NL9tBsELS)

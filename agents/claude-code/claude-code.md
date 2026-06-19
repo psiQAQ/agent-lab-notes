@@ -6,11 +6,11 @@ Claude Code 是 Anthropic 的命令行编码助手，可用于读写代码、执
 
 ## 安装 Git
 
-见：[Windows 安装 Git](../../others/git.md)
+见：[Windows/Mac/Linux/WSL 安装 Git](../../others/git.md)
 
 ## 安装 Node.js
 
-见：[Windows 安装 Node.js](../../programme-env/nodejs.md)
+见：[Windows/Mac/Linux/WSL 安装 Node.js](../../programme-env/nodejs.md)
 
 ## 安装 Claude Code
 
@@ -48,46 +48,48 @@ claude upgrade
 ## 申请 DeepSeek API，并把它接到 Claude Code
 
 如果你准备直接用 Anthropic 官方账号，这一步可以略过。
-
-但这篇文章讨论的是国内更常见的方案：Claude Code 装在本地，后端走 DeepSeek 的 Anthropic 兼容接口。
+国内更常见的方案：Claude Code 装在本地，后端走 DeepSeek 的 Anthropic 兼容接口。
 
 ### 先申请 DeepSeek API Key
 
-DeepSeek 官方站点：
+DeepSeek 官方站点：<https://www.deepseek.com/>
+API 文档：<https://api-docs.deepseek.com/zh-cn/>
 
-<https://www.deepseek.com/>
-
-API 文档：
-
-<https://api-docs.deepseek.com/zh-cn/>
-
-注册登录后，进入 API 平台，完成充值和密钥创建。
-
-目前最低充值 10 元，充值前需要实名认证。建议先小额尝试，确认自己确实会长期使用后，再按需要继续充值。
-
-创建 API Key 后，请立刻保存。平台通常不会再次完整展示同一把密钥。
+1. 注册登录后，进入 API 平台，完成充值和密钥创建。
+2. 目前最低充值 10 元，充值前需要实名认证。
+3. 建议先小额尝试，确认自己确实会长期使用后，再按需要继续充值。
+4. 创建 API Key 后，请立刻保存。平台通常不会再次完整展示同一把密钥。
 
 ![DeepSeek-apikey](assets/screenshot/DeepSeek-apikey.png)
 
 DeepSeek 接入 Claude Code 的官方文档：
-
 <https://api-docs.deepseek.com/zh-cn/quick_start/agent_integrations/claude_code>
 
 ## 配置 Claude Code
 
-### 创建或打开配置文件
-
-在 CMD 里执行：
+### 1. 创建或打开配置文件
 
 ```bash
+# Windows 在 CMD 里执行
 mkdir "%USERPROFILE%\.claude" 2>nul
 if not exist "%USERPROFILE%\.claude\settings.json" (
     echo {} > "%USERPROFILE%\.claude\settings.json"
 )
 notepad "%USERPROFILE%\.claude\settings.json"
+
+# Mac/Linux/WSL 在 Terminal 里执行
+mkdir -p ~/.claude
+if [ ! -f ~/.claude/settings.json ]; then
+    echo "{}" > ~/.claude/settings.json
+fi
+nano ~/.claude/settings.json
+# nano 保存退出方式：
+# Ctrl + O
+# Enter
+# Ctrl + X
 ```
 
-### 写入示例配置
+### 2. 写入示例配置
 
 根据个人配置经验，可以参考下面这个 `settings.json` 作为推荐配置：
 
@@ -161,7 +163,25 @@ claude
 
 ## 快捷启动方式
 
-将 [cc.bat](./cc.bat) 下载到桌面，双击即可启动 Claude Code。
+- windows 用户将 [cc.bat](./cc.bat) 下载到桌面，双击即可启动 Claude Code。
+- macOS/Linux/WSL 用户将 [cc.sh](./cc.sh) 文件下载到 `~/.claude` 下
+
+```bash
+# Mac
+# 写入 zsh 启动配置
+grep -qxF 'source ~/.claude/cc.sh' ~/.zshrc || echo 'source ~/.claude/cc.sh' >> ~/.zshrc
+# 立即生效
+source ~/.zshrc
+
+# Linux/WSL
+# 写入 bash 启动配置
+grep -qxF 'source ~/.claude/cc.sh' ~/.bashrc || echo 'source ~/.claude/cc.sh' >> ~/.bashrc
+# 立即生效
+source ~/.bashrc
+
+# 后续直接在终端中使用 cc 启动
+cc
+```
 
 - 使用前建议根据实际情况修改 `base` 项目根目录，例如设置为 `D:\workspace`，用于存放和管理所有项目；
 - 脚本会自动列出项目根目录下的一级项目文件夹，也支持创建新项目并自动进入对应目录；
