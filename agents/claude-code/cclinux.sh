@@ -1,7 +1,5 @@
 # Claude project launcher
 cc() {
-    # Mac 用户建议将 base 设置为 ~/Desktop/workspace
-    local base="$HOME/Desktop/workspace"
     # Linux/WSL 用户可改为：
     # local base="$HOME/workspace"
 
