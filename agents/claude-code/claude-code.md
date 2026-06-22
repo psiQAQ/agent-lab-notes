@@ -163,19 +163,20 @@ claude
 
 ## 快捷启动方式
 
-- windows 用户将 [cc.bat](./cc.bat) 下载到桌面，双击即可启动 Claude Code。
-- macOS/Linux/WSL 用户将 [cc.sh](./cc.sh) 文件下载到 `~/.claude` 下
+- windows 用户将 [cc.bat](./cc.bat) 下载到桌面，双击即可启动 Claude Code
+- macOS 用户将 [ccmac.sh](./ccmac.sh) 文件下载到 `~/.claude` 下
+- Linux/WSL 用户将 [cclinux.sh](./cclinux.sh) 文件下载到 `~/.claude` 下
 
 ```bash
 # Mac
 # 写入 zsh 启动配置
-grep -qxF 'source ~/.claude/cc.sh' ~/.zshrc || echo 'source ~/.claude/cc.sh' >> ~/.zshrc
+grep -qxF 'source ~/.claude/ccmac.sh' ~/.zshrc || echo 'source ~/.claude/ccmac.sh' >> ~/.zshrc
 # 立即生效
 source ~/.zshrc
 
 # Linux/WSL
 # 写入 bash 启动配置
-grep -qxF 'source ~/.claude/cc.sh' ~/.bashrc || echo 'source ~/.claude/cc.sh' >> ~/.bashrc
+grep -qxF 'source ~/.claude/cclinux.sh' ~/.bashrc || echo 'source ~/.claude/cclinux.sh' >> ~/.bashrc
 # 立即生效
 source ~/.bashrc
 
