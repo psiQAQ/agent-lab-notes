@@ -39,6 +39,10 @@
 - 📄[Codex 指南](agents/codex/codex.md)
 - 📄[AGENTS.md - 全局指令示范文件](agents/codex/AGENTS.md)
 
+#### 临时问题，后续更新可能修复
+
+- 📄[Codex logs_2.sqlite 高频写盘问题排查与止血方案](agents/codex/codex-sqlite-bug-fix.md)
+
 ## 4. 智能体扩展
 
 ### 4.1 Skills
