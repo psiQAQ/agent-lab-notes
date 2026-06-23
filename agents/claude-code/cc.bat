@@ -87,7 +87,7 @@ if errorlevel 1 (
 )
 
 rem ===== 启动 Claude，并透传所有参数 =====
-claude --dangerously-skip-permissions --settings "%settings_file%" %*
+claude --settings "%settings_file%" %*
 
 exit /b %errorlevel%
 

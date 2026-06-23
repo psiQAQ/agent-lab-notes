@@ -95,6 +95,7 @@ nano ~/.claude/settings.json
 
 ```json
 {
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
     "ANTHROPIC_BASE_URL": "https://api.deepseek.com/anthropic",
     "ANTHROPIC_AUTH_TOKEN": "sk-0000000000000000000000000000000",
@@ -113,13 +114,70 @@ nano ~/.claude/settings.json
     "DISABLE_AUTOUPDATER": "1"
   },
   "permissions": {
-    "defaultMode": "default"
+    "defaultMode": "bypassPermissions",
+    "ask": [
+      "Bash(sudo *)",
+
+      "Bash(rm *)",
+      "Bash(rmdir *)",
+      "Bash(unlink *)",
+      "Bash(shred *)",
+
+      "Bash(git commit)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(git clean *)",
+      "Bash(git rebase *)",
+      "Bash(git reset --hard *)",
+      "Bash(git checkout -- *)",
+      "Bash(git restore *)",
+
+      "Bash(pip install *)",
+      "Bash(pip uninstall *)",
+      "Bash(pip3 install *)",
+      "Bash(pip3 uninstall *)",
+      "Bash(py -m pip install *)",
+      "Bash(py -m pip uninstall *)",
+      "Bash(python -m pip install *)",
+      "Bash(python -m pip uninstall *)",
+      "Bash(python3 -m pip install *)",
+      "Bash(python3 -m pip uninstall *)",
+
+      "Bash(uv add *)",
+      "Bash(uv remove *)",
+      "Bash(uv pip install *)",
+      "Bash(uv pip uninstall *)",
+      "Bash(uv sync *)",
+      "Bash(uv lock *)",
+
+      "Bash(conda install *)",
+      "Bash(conda uninstall *)",
+      "Bash(conda remove *)",
+      "Bash(conda update *)",
+      "Bash(conda env remove *)",
+
+      "Bash(mamba install *)",
+      "Bash(mamba uninstall *)",
+      "Bash(mamba remove *)",
+      "Bash(mamba update *)",
+      "Bash(mamba env remove *)",
+
+      "Bash(npm install *)",
+      "Bash(npm uninstall *)",
+      "Bash(npm remove *)",
+      "Bash(npm update *)"
+    ]
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
   },
   "language": "中文",
   "effortLevel": "high",
   "theme": "auto",
   "editorMode": "normal",
-  "verbose": true
+  "verbose": true,
+  "tui": "fullscreen"
 }
 ```
 

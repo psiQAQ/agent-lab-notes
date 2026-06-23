@@ -1,7 +1,7 @@
 # Claude project launcher
 cc() {
-    # Linux/WSL 用户可改为：
-    # local base="$HOME/workspace"
+    # Linux/WSL 推荐在根目录下创建 workspace 文件夹
+    local base="$HOME/workspace"
 
     local choice project_name settings_file settings_choice
     local settings_files=()
@@ -92,5 +92,5 @@ cc() {
         fi
     done
 
-    claude --dangerously-skip-permissions --settings "$settings_file" "$@"
+    claude --settings "$settings_file" "$@"
 }

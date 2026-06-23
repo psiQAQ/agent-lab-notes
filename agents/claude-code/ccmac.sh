@@ -130,5 +130,5 @@ cc() {
     echo "Settings: $settings_file"
 
     # 启动 Claude Code
-    claude --dangerously-skip-permissions --settings "$settings_file" "$@"
+    claude --settings "$settings_file" "$@"
 }

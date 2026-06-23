@@ -38,6 +38,7 @@
 
 - 📄[Codex 指南](agents/codex/codex.md)
 - 📄[AGENTS.md - 全局指令示范文件](agents/codex/AGENTS.md)
+- 🧾[查询 ChatGPT 套餐周额度重置次数和时间限制脚本](agents/codex/codex-reset-remaining.py)
 
 #### 临时问题，后续更新可能修复
 
