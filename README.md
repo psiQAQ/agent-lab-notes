@@ -40,10 +40,6 @@
 - 📄[AGENTS.md - 全局指令示范文件](agents/codex/AGENTS.md)
 - 🧾[查询 ChatGPT 套餐周额度重置次数和时间限制脚本](agents/codex/codex-reset-remaining.py)
 
-#### 临时问题，后续更新可能修复
-
-- 📄[Codex logs_2.sqlite 高频写盘问题排查与止血方案](agents/codex/codex-sqlite-bug-fix.md)
-
 ## 4. 智能体扩展
 
 ### 4.1 Skills
@@ -67,8 +63,9 @@
 
 - 📄[zotero 指南](others/zotero.md)
 
-## 6. 大模型排行榜
+## 6. 大模型选型与排行榜
 
+- 📄[Models.dev｜AI 模型规格、价格与能力查询](models/models-dev.md)
 - 📊[Artificial Analysis｜AI模型评测与API性能分析](https://artificialanalysis.ai/)
 - ⚔️[Arena AI｜大模型竞技场与排行榜](https://arena.ai/)
 
