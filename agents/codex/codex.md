@@ -1,6 +1,6 @@
 # Codex 指南
 
-Codex CLI 是 OpenAI 的本地终端代码代理，会在当前目录读取、修改、运行代码；ChatGPT Plus、Pro、Business、Edu、Enterprise 计划包含 Codex。首次运行 `codex` 会提示登录 ChatGPT 账号或使用 API key。
+Codex CLI 是 OpenAI 的本地终端代码智能体，会在当前目录读取、修改、运行代码；ChatGPT Plus、Pro、Business、Edu、Enterprise 计划包含 Codex。首次运行 `codex` 会提示登录 ChatGPT 账号或使用 API key。
 
 ## 安装建议
 

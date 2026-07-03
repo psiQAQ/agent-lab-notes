@@ -37,8 +37,11 @@
 ### 3.2 Codex
 
 - 📄[Codex 指南](agents/codex/codex.md)
+  - 📄[Codex 指南 - 防吞备用 github 地址](https://github.com/psiQAQ/agent-lab-notes/blob/main/agents/codex/codex.md)
 - 📄[AGENTS.md - 全局指令示范文件](agents/codex/AGENTS.md)
 - 🧾[查询 ChatGPT 套餐周额度重置次数和时间限制脚本](agents/codex/codex-reset-remaining.py)
+
+> 注意：使用 GPT 模型时，推荐使用 Codex，其他模型推荐使用 Claude Code。
 
 ## 4. 智能体扩展
 
