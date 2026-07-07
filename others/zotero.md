@@ -24,7 +24,7 @@ Zotero 中文社区的插件地址：
 
 第一步安装 `Add-on Market for Zotero`，方便后续安装其他插件。
 
-<https://gh-proxy.org//https://github.com/syt2/zotero-addons/releases/download/V9.0.2/zotero-addons.xpi>
+[插件市场 xpi 下载镜像地址](https://gh-proxy.org//https://github.com/syt2/zotero-addons/releases/download/V9.0.2/zotero-addons.xpi)
 
 打开 `zotero`，点击 `工具` -> `插件`，将下载的 `xpi` 文件拖入窗口中即可完成安装。
 
@@ -32,14 +32,18 @@ Zotero 中文社区的插件地址：
 
 ## 插件推荐
 
+### 常用插件推荐
+
 - Translate for Zotero
 - Better BibTeX for Zotero
 - Zotero MCP Plugin（建议不装这个，后续介绍我开发的功能更多的派生版本）
 - ...
-- 按照 Star 数排序选择想要的插件进行安装
+- 选择想要的插件进行一键安装，插件均支持自动更新。
 - ...
 
-## 智能体 调用 zotero MCP 管理 zotero 的文献
+### Zotero 与 AI 智能体联动
+
+#### AI 控制 zotero 现有方案
 
 目前调用 AI 管理文献有多个实现的方案，以下是一些案例的比较：
 
@@ -57,9 +61,19 @@ Zotero 中文社区的插件地址：
 
 ✅=具备可直接用｜✗=缺失｜数字=具体程度。
 
-### zotero-mcp 二次开发
+#### Zotero-Agent
 
-本人以 `cookjohn/zotero-mcp` 为模板开发了 `zotero-mcp-dev`，并发布 `v1.6.0`，主要改进为：
+为了让文献在智能体控制下实现更多功能，例如：
+
+- 本地 PDF 批量导入
+- PDF 元数据条目建立
+- tag 标签建立
+- 文献分类整理
+- 搜索并下载相关文献
+- .bib 引用生成
+- 生成文献工作流总结，为后续操作提供参考
+
+本人以 `cookjohn/zotero-mcp` 为模板开发了 [Zotero-Agent](https://github.com/psiQAQ/zotero-agent)，并发布 `v2.x.x`，主要改进为：
 
 * 新增 `run_javascript`（进程内 JS 调试/扩展执行）
 * 新增文献工作流工具（缺失PDF检测、撤稿检查、关联分析、去重合并、批量标签等）
@@ -67,25 +81,39 @@ Zotero 中文社区的插件地址：
 * 改进导入与去重（DOI/ADS/Extra 结构优化）
 * 增加写操作分级控制（dry-run + write.enabled）
 
-> 详情见：[Release Tag](https://github.com/psiQAQ/zotero-mcp-dev/releases/tag/1.6.0)
+#### 安装过程
 
-仓库地址见
-- [github 版](https://github.com/psiQAQ/zotero-mcp-dev)
-- [gitcode 版](https://gitcode.com/RepoPorter/zotero-mcp-dev/blob/feat/psk-eval-run-js/README.md)
+1. 安装 `zotero-agent` 插件
 
-安装过程在 `README.md` 中有详细说明。
+- （待插件市场更新，暂时推荐使用下面两种方式）前文安装的 `Add-on Market for Zotero` 插件中搜索 `zotero-agent`，右键点击 `安装` 即可
+- [Release xpi 插件下载地址](https://github.com/psiQAQ/zotero-agent/releases)
+- [xpi 下载镜像地址](https://gh-proxy.org//https://github.com/psiQAQ/zotero-agent/releases/download/v2.0.2/zotero-agent-2.0.2.xpi)
 
-## 文献导入
+打开 `zotero`，点击 `工具` -> `插件`，将下载的 `xpi` 文件拖入窗口中即可完成安装。
 
-提示词参考：
+2. 配置智能体客户端 `MCP` 服务
 
-```plain
-帮我检查pdf文件夹中的文献，将其全部导入到zotero中;
-创建目录进行归类，可多级目录，分类依据为研究方向;
-每篇文献从摘要中生成标签，用于筛选使用；
-python 需要使用是优先使用项目的 uv 环境。
-```
+   1. 方式一（推荐）：在 `zotero` -> `编辑` -> `设置` -> `Zotero Agent` -> `客户端配置`，选择正在使用的客户端，复制配置，自行配置或交给智能体代为配置。
 
-```plain
-按照PRL的引用格式，利用 Better BibTeX for Zotero 插件帮我导出为 bib 文件
-```
+   2. 方式二：智能体阅读配置文档指导你配置：
+      - [github 版](https://github.com/psiQAQ/zotero-agent/)
+      - [国内可访问 gitcode 版](https://gitcode.com/RepoPorter/zotero-agent)
+
+
+#### 提示词范例
+
+* **本地 PDF 批量导入 + 元数据条目建立**
+  请将本地文件夹 **xxx** 中的 PDF **批量导入 Zotero**。先扫描所有 PDF，识别 **重复文件**、**已有条目** 和 **新文件**；对新 PDF 提取 **DOI**、**arXiv ID**、**ISBN**、**PMID**、**标题** 等信息，并优先通过标识符建立标准 Zotero 文献条目。将 PDF 附加到对应条目下，补全 **作者**、**年份**、**期刊/会议**、**摘要**、**DOI** 等元数据，并加入 collection **xxx**。所有写入操作先输出 **dry-run 清单**，确认后再执行。
+
+* **文献分类整理 + tag 标签建立**
+  请整理 Zotero 中 collection **xxx** 的文献结构。根据 **标题**、**摘要**、**全文**、**已有 tag** 和 **注释**，将文献分类到子 collection：**xxx**、**xxx**、**xxx**、**xxx**、**xxx**。每篇文献可以进入多个子 collection。请同时建立统一 **tag 体系**，合并 **大小写**、**连字符**、**下划线** 和 **同义重复 tag**。先输出 **分类表**、**tag 映射表** 和 **判断依据**，确认后再批量写入。
+
+* **搜索并下载相关文献**
+  请围绕研究主题 **xxx** 搜索并扩展相关文献。先检索 **Zotero 本地库**，再基于核心文献的 **引用**、**被引** 和 **相似论文** 继续扩展。对库中不存在但相关性高的文献，尝试通过 **DOI**、**arXiv ID**、**ISBN** 或 **PMID** 导入；如果能找到 **开放获取 PDF**，请下载并附加到 Zotero 条目。最后输出 **已存在文献**、**新增文献**、**无法导入文献** 和 **未能下载 PDF** 的清单。
+
+* **文献注释综合 + 综述笔记生成**
+  请读取 collection **xxx** 中所有文献的 **PDF 高亮**、**批注**、**笔记** 和 **摘要**，生成一份结构化文献综述笔记。请按 **研究背景**、**核心问题**、**方法路线**、**数据集**、**实验设置**、**评价指标**、**主要结论**、**局限性** 和 **可引用观点** 分类整理。每条结论都标注对应 Zotero 条目。先展示 **综述草稿**，确认后再写入 Zotero note。
+
+* **项目收尾检查 + .bib 引用生成 + 工作流总结**
+  请对 Zotero 项目 **xxx** 进行一次完整的文献工作流收尾检查。检查 **重复条目**、**缺失 PDF**、**缺失 DOI**、**缺失摘要**、**元数据不完整**、**tag 混乱**、**未分类文献** 和 **可能的撤稿风险**；修复前先输出 **dry-run 报告**。随后基于清理后的 collection 生成 **BibTeX**，citation key 格式为 **FirstAuthorYearShortTitle**，并生成一份 **工作流总结**，记录 **已完成操作**、**遗留问题** 和 **后续建议**。
+
