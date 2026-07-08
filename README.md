@@ -65,6 +65,7 @@
 ## 5. 科研助力
 
 - 📄[zotero 指南](others/zotero.md)
+- 📄[academic-research-skills](agents/plugins/academic-research-skills.md)
 
 ## 6. 大模型选型与排行榜
 
