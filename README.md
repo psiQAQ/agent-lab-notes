@@ -99,3 +99,4 @@
 - 📺[对姚顺宇的4小时访谈](https://www.bilibili.com/video/BV1YR5E6EE9o)
 - 📺[中美大模型差距过去一年变大还是缩小？- Hugging Face | 王铁震](https://www.bilibili.com/video/BV1HDVT6bE8x)
 - 📺[跟三个大厂码农聊了一晚上，程序员眼中AI叙事的真相原来是这样](https://www.bilibili.com/video/BV1gyEd6xEyu)
+- 🌐[一个网页用于检测你的电脑能运行本地 AI 模型](https://www.canirun.ai)
