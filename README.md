@@ -39,7 +39,7 @@
 - 📄[Codex 指南](agents/codex/codex.md)
   - 📄[Codex 指南 - 防吞备用 github 地址](https://github.com/psiQAQ/agent-lab-notes/blob/main/agents/codex/codex.md)
 - 📄[AGENTS.md - 全局指令示范文件](agents/codex/AGENTS.md)
-- 🧾[查询 ChatGPT 套餐周额度重置次数和时间限制脚本](agents/codex/codex-reset-remaining.py)
+- 🧾[查询 GPT 套餐周额度重置机会的过期准确时间](agents/codex/codex-reset-remaining.py)
 
 > 注意：使用 GPT 模型时，推荐使用 Codex，其他模型推荐使用 Claude Code。
 
@@ -85,6 +85,11 @@
 
 ## 8. 补充资料
 
+### 外部 Agent 学习指南
+
+- 📚[AI 编程指南｜Claude Code](https://coding.stormzhang.ai/)
+- 📚[AI 编程指南｜Codex](https://coding.stormzhang.ai/)
+
 ### bilibili-技术爬爬虾
 
 - 📺[Codex (APP) 保姆级全攻略，海量实战教程， 一期精通Codex](https://www.bilibili.com/video/BV1Kk9kBAEJv)
@@ -104,4 +109,4 @@
 - 📺[对姚顺宇的4小时访谈](https://www.bilibili.com/video/BV1YR5E6EE9o)
 - 📺[中美大模型差距过去一年变大还是缩小？- Hugging Face | 王铁震](https://www.bilibili.com/video/BV1HDVT6bE8x)
 - 📺[跟三个大厂码农聊了一晚上，程序员眼中AI叙事的真相原来是这样](https://www.bilibili.com/video/BV1gyEd6xEyu)
-- 🌐[一个网页用于检测你的电脑能运行本地 AI 模型](https://www.canirun.ai)
+- 🌐[一个网页用于检测你的电脑能运行哪种本地 AI 模型](https://www.canirun.ai)
