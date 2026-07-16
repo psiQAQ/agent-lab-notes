@@ -114,13 +114,17 @@ reg delete HKCU\Environment /v NO_PROXY /f
 
 ## 全局指令
 
-`AGENTS.md` 是 Codex 读取的智能体指令文件，用于告诉编码智能体：
+`AGENTS.md` 是 Codex 读取的智能体指令文件，已根据 [OpenAI GPT-5.6 Sol 提示指南](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) 适配，采用精简、结果导向的写法。当前指令覆盖：
 
-- 项目如何安装、构建和测试；
-- 修改代码时需要遵守哪些规范；
-- 哪些目录、文件或命令需要特别注意；
-- 什么时候需要运行测试、格式化或检查命令；
-- 需要避免哪些危险操作。
+- 沟通规范（中文为主）与输出格式；
+- 任务执行框架：目标、成功标准、约束、验证、停止条件；
+- 编码原则：先思考后编码、简洁优先、精准修改、目标驱动；
+- 自主权与审批边界：区分可直接执行与需确认的操作；
+- Python 环境与依赖管理；
+- Git 工作流与安全边界；
+- 工具选择与子 Agent 协作规范；
+- 文档编写与验证要求；
+- Windows `.bat` 脚本规则。
 
 通常有两类用法：
 
@@ -132,7 +136,7 @@ reg delete HKCU\Environment /v NO_PROXY /f
 
 ### 推荐指令文件参考
 
-[AGENTS.md](./AGENTS.md)
+[AGENTS.md](./AGENTS.md) — 已按 [GPT-5.6 Sol 提示指南](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) 精简优化，去掉重复规则和过度指令，仅保留结果导向的关键约束。
 
 先下载到本地并移动到 `%USERPROFILE%\.codex\AGENTS.md` or `~/.codex/AGENTS.md`，对所有项目生效，或使用以下参考命令：
 
