@@ -126,7 +126,7 @@ reg delete HKCU\Environment /v NO_PROXY /f
 - 文档编写与验证要求；
 - Windows `.bat` 脚本规则。
 
-通常有两类用法：
+通常有三类用法：
 
 | 类型 | 推荐位置 | 作用 |
 | ------- | ---------------------------------------- | ----------- |
@@ -138,12 +138,28 @@ reg delete HKCU\Environment /v NO_PROXY /f
 
 [AGENTS.md](./AGENTS.md) — 已按 [GPT-5.6 Sol 提示指南](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) 精简优化，去掉重复规则和过度指令，仅保留结果导向的关键约束。
 
-先下载到本地并移动到 `%USERPROFILE%\.codex\AGENTS.md` or `~/.codex/AGENTS.md`，对所有项目生效，或使用以下参考命令：
+### 为什么全局指令需要实测
+
+全局指令会影响之后的每个任务。看似稳妥的规则如果未经验证，可能在提高正确率的同时引入更多命令、失败和重复尝试。[Codex Windows Efficiency Kit](https://github.com/psiQAQ/codex-windows-efficiency-kit) 提供了一套可复现的 Windows 原生 A/B 评测，用固定任务比较默认配置与候选指令，并以正确性和命令质量作为准入门槛。
+
+在项目记录的固定环境中，最终候选规则取得了以下结果：
+
+| 指标 | 默认配置 | 候选指令 | 变化 |
+| --- | ---: | ---: | ---: |
+| 正确运行 | 30/36 | 36/36 | +6 |
+| 平均得分 | 76.61 | 90.17 | +13.56 |
+| 中位耗时 | 78.224 秒 | 67.285 秒 | -10.939 秒 |
+| 工作负载命令 | 457 | 386 | -71 |
+| 失败命令 | 46 | 34 | -12 |
+
+实验也表明，提示词并非越长越好：较宽泛的初版 Windows 规则虽然改善了正确性，却增加了执行开销；严格筛选后，只有 UTF-8 文件写入和路径排序两条规则进入最终全局指令。本页提供的 `AGENTS.md` 已包含这两条规则。上述数值来自固定的 CLI、模型和 Windows 沙箱组合，不代表所有环境都能获得相同幅度的提升；该仓库更重要的价值是提供可审计、可复跑的验证方法。
+
+先下载到本地并移动到 `%USERPROFILE%\.codex\AGENTS.md` 或 `~/.codex/AGENTS.md`，对所有项目生效，或使用以下参考命令：
 
 ```bash
 # Windows（Powershell）
-mkdir "%USERPROFILE%\.codex"
-Move-Item AGENTS.md "%USERPROFILE%\.codex\AGENTS.md"
+New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex" | Out-Null
+Copy-Item .\AGENTS.md "$env:USERPROFILE\.codex\AGENTS.md"
 
 # macOS / Linux / WSL
 mkdir ~/.codex

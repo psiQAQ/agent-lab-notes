@@ -319,3 +319,10 @@ Remaining Issues:
 * 保留关键参数、实验条件和数据。
 * 保留数学公式和技术细节。
 * 不将推测写成结论。
+
+<!-- BEGIN CODEX WINDOWS EXECUTION POLICY -->
+# Native Windows reliability
+
+- For UTF-8 without BOM, preserve encoding, BOM state, and line endings; do not write with Windows PowerShell 5.1 `Set-Content`, `Out-File`, `>` or `>>`.
+- Sort paths ordinally by Unicode code point (for example, Python `sorted`); do not use culture-sensitive PowerShell `Sort-Object`.
+<!-- END CODEX WINDOWS EXECUTION POLICY -->
