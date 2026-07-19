@@ -136,43 +136,7 @@ reg delete HKCU\Environment /v NO_PROXY /f
 
 ### 推荐指令文件参考
 
-[AGENTS.md](./AGENTS.md) — 已按 [GPT-5.6 Sol 提示指南](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) 精简优化，去掉重复规则和过度指令，仅保留结果导向的关键约束。
-
-### 为什么 Windows 下需要补充规则
-
-Codex 在 Windows 原生环境中主要通过 PowerShell 处理文件和命令，其中有两个容易被忽略的平台差异：
-
-- Windows PowerShell 5.1 的 `Set-Content`、`Out-File` 和重定向符可能改变 UTF-8 文件的 BOM 或换行格式。一次很小的文本修改因此可能变成整文件 diff，甚至导致解析或构建失败。
-- PowerShell 的 `Sort-Object` 默认使用当前系统区域设置。包含中文或其他 Unicode 字符的路径在不同电脑上可能得到不同顺序，使测试结果和生成文件不稳定。
-
-本页提供的 [AGENTS.md](./AGENTS.md) 只增加了两条对应规则：修改 UTF-8 无 BOM 文件时保留编码、BOM 和换行；路径列表按 Unicode code point 排序，不使用依赖系统区域设置的 `Sort-Object`。补丁保持很小，因为全局指令会影响之后的每个任务，多余规则带来的命令和重试也会被重复放大。
-
-### 这些规则是怎样测试的
-
-[Codex Windows Efficiency Kit](https://github.com/psiQAQ/codex-windows-efficiency-kit) 将这些问题做成了可复现的 Windows 原生 A/B 测试，而不是根据一次对话或主观感受判断效果：
-
-1. baseline 与 candidate 使用同一个 Codex 可执行文件、模型、Windows sandbox、测试夹具、重复次数和超时设置；两组之间只改变候选全局指令。
-2. 12 个计分用例覆盖字面量搜索、Unicode 和空格路径、JSON、CSV、大日志、UTF-8 无 BOM 编辑、子目录执行、子进程、定点修改和 Markdown 解析。每个用例重复 3 次，因此两组各有 36 次计分执行。
-3. 结果由独立 validator 检查文件内容、字节格式和结构化输出，不采用 Codex 自己声称“已完成”作为通过依据。诊断指令是否加载的 T00 用例单独保留，不计入工作负载统计。
-4. 候选规则只有在正确率和平均分不下降，命令数、失败命令、重复重试和脆弱命令模式均不增加，并且命令数或脆弱模式至少一项下降时，才会得到 `candidate-supported` 推荐。
-
-实验固定使用 Codex CLI 0.142.5、`gpt-5.4`、Windows 原生 `unelevated` sandbox，每个用例超时 300 秒。最终结果如下：
-
-| 指标 | 默认配置 | 候选指令 | 变化 |
-| --- | ---: | ---: | ---: |
-| 正确率 | 83.33% | 100% | +16.67 个百分点 |
-| 平均得分 | 76.61 | 90.17 | +13.56 |
-| 中位耗时 | 78.224 秒 | 67.285 秒 | -10.939 秒 |
-| 工作负载命令 | 457 | 386 | -71 |
-| 失败命令 | 46 | 34 | -12 |
-
-### 实验得到的结论
-
-在这套固定环境中，两条规则把正确率从 83.33% 提高到 100%，同时减少了 71 条工作负载命令和 12 条失败命令，中位耗时缩短 10.939 秒。机器判定结果为 `candidate-supported`。
-
-测试也否定了“提示词越完整越好”的假设。早期的宽泛 Windows 指令改善了正确性，却增加了命令、失败和重复尝试，因此没有全部进入最终版本；严格筛选后只保留了 UTF-8 文件写入和路径排序两条规则。耗时容易受机器负载影响，所以该项目把正确性和命令质量作为主要门槛，把耗时放在次要位置。
-
-仓库公开了 evaluator 源码、测试用例、validator、单元测试和验证记录，其他开发者可以在自己的环境中复跑。原始事件、日志和环境信息因可能包含本地路径或隐私而没有发布，因此这些数据证明的是上述固定环境中的改进，不代表其他 Codex 版本、模型或 Windows 配置一定获得相同幅度的提升。
+[AGENTS.md](./AGENTS.md) — 已按 [GPT-5.6 Sol 提示指南](https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6) 精简优化，去掉重复规则和过度指令，仅保留结果导向的关键约束。Windows 用户可以直接使用，其中两条原生 Windows 规则分别处理 UTF-8 文件写入和 Unicode 路径排序；筛选过程和实验结果见[附录](#附录windows-全局指令的实验依据)。
 
 先下载到本地并移动到 `%USERPROFILE%\.codex\AGENTS.md` 或 `~/.codex/AGENTS.md`，对所有项目生效，或使用以下参考命令：
 
@@ -280,6 +244,44 @@ Codex 重置次数（北京时间）
 ```
 
 > 脚本原理：读取本地 Codex 登录态里的 ChatGPT access token，然后调用 ChatGPT 后端的“rate-limit reset credits”接口，最后把返回的重置次数和到期时间格式化输出为北京时间。它不是通过 Codex CLI 官方命令查询，而是直接访问 ChatGPT Web 后端接口。
+
+## 附录：Windows 全局指令的实验依据
+
+### 为什么需要补充规则
+
+Codex 在 Windows 原生环境中主要通过 PowerShell 处理文件和命令，其中有两个容易被忽略的平台差异：
+
+- Windows PowerShell 5.1 的 `Set-Content`、`Out-File` 和重定向符可能改变 UTF-8 文件的 BOM 或换行格式。一次很小的文本修改因此可能变成整文件 diff，甚至导致解析或构建失败。
+- PowerShell 的 `Sort-Object` 默认使用当前系统区域设置。包含中文或其他 Unicode 字符的路径在不同电脑上可能得到不同顺序，使测试结果和生成文件不稳定。
+
+本页提供的 [AGENTS.md](./AGENTS.md) 只增加了两条对应规则：修改 UTF-8 无 BOM 文件时保留编码、BOM 和换行；路径列表按 Unicode code point 排序，不使用依赖系统区域设置的 `Sort-Object`。补丁保持很小，因为全局指令会影响之后的每个任务，多余规则带来的命令和重试也会被重复放大。
+
+### 测试方法
+
+[Codex Windows Efficiency Kit](https://github.com/psiQAQ/codex-windows-efficiency-kit) 将这些问题做成了可复现的 Windows 原生 A/B 测试，而不是根据一次对话或主观感受判断效果：
+
+1. baseline 与 candidate 使用同一个 Codex 可执行文件、模型、Windows sandbox、测试夹具、重复次数和超时设置；两组之间只改变候选全局指令。
+2. 12 个计分用例覆盖字面量搜索、Unicode 和空格路径、JSON、CSV、大日志、UTF-8 无 BOM 编辑、子目录执行、子进程、定点修改和 Markdown 解析。每个用例重复 3 次，因此两组各有 36 次计分执行。
+3. 结果由独立 validator 检查文件内容、字节格式和结构化输出，不采用 Codex 自己声称“已完成”作为通过依据。诊断指令是否加载的 T00 用例单独保留，不计入工作负载统计。
+4. 候选规则只有在正确率和平均分不下降，命令数、失败命令、重复重试和脆弱命令模式均不增加，并且命令数或脆弱模式至少一项下降时，才会得到 `candidate-supported` 推荐。
+
+实验固定使用 Codex CLI 0.142.5、`gpt-5.4`、Windows 原生 `unelevated` sandbox，每个用例超时 300 秒。最终结果如下：
+
+| 指标 | 默认配置 | 候选指令 | 变化 |
+| --- | ---: | ---: | ---: |
+| 正确率 | 83.33% | 100% | +16.67 个百分点 |
+| 平均得分 | 76.61 | 90.17 | +13.56 |
+| 中位耗时 | 78.224 秒 | 67.285 秒 | -10.939 秒 |
+| 工作负载命令 | 457 | 386 | -71 |
+| 失败命令 | 46 | 34 | -12 |
+
+### 结论与适用范围
+
+在这套固定环境中，两条规则把正确率从 83.33% 提高到 100%，同时减少了 71 条工作负载命令和 12 条失败命令，中位耗时缩短 10.939 秒。机器判定结果为 `candidate-supported`。
+
+测试也否定了“提示词越完整越好”的假设。早期的宽泛 Windows 指令改善了正确性，却增加了命令、失败和重复尝试，因此没有全部进入最终版本；严格筛选后只保留了 UTF-8 文件写入和路径排序两条规则。耗时容易受机器负载影响，所以该项目把正确性和命令质量作为主要门槛，把耗时放在次要位置。
+
+仓库公开了 evaluator 源码、测试用例、validator、单元测试和验证记录，其他开发者可以在自己的环境中复跑。原始事件、日志和环境信息因可能包含本地路径或隐私而没有发布，因此这些数据证明的是上述固定环境中的改进，不代表其他 Codex 版本、模型或 Windows 配置一定获得相同幅度的提升。
 
 [1]: https://developers.openai.com/codex/config-basic "Config basics – Codex | OpenAI Developers"
 [2]: https://developers.openai.com/codex/guides/agents-md "Custom instructions with AGENTS.md – Codex | OpenAI Developers"
